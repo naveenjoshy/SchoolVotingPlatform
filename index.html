@@ -11,6 +11,14 @@
 </head>
 
 <body>
+    <div class="success-overlay" id="successOverlay">
+        <div class="success-message">
+            <div class="checkmark">✓</div>
+            <h1>Thank You!</h1>
+            <p>Your vote has been cast successfully</p>
+        </div>
+    </div>
+
     <div class="top-banner">
         <img src="Images/SchoolLogo.jpeg" width="60%" height="160px" alt="School Logo" class="school-logo">
     </div>
@@ -149,7 +157,13 @@
                 },
                 method: "post",
                 success: function (response) {
-                    alert("Vote submitted successfully!")
+                    // Disable the form
+                    $('#votingForm').addClass('form-disabled');
+                    $('.selectable').addClass('form-disabled');
+                    $('.candidate-panel').addClass('form-disabled');
+
+                    // Show success overlay
+                    $('#successOverlay').addClass('show');
                 },
                 error: function (err) {
                     console.log("Error:", err);
