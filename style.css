@@ -7,18 +7,16 @@
 body {
     min-height: 100vh;
     font-family: "Trebuchet MS", sans-serif;
-    background: repeating-linear-gradient(
-        45deg,
-        #1a1a1a,
-        #1a1a1a 10px,
-        #2d2d2d 10px,
-        #2d2d2d 20px
-    );
+    background: url('Images/bg Large.jpeg') no-repeat center/cover;
+    background-attachment: fixed;
     color: #1a2332;
 }
 
 .top-banner {
     padding-top: 10px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
+    padding-bottom: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .school-logo {
@@ -29,10 +27,14 @@ body {
 }
 
 .hero-text-1 {
-    font-size: 1.8rem;
+    font-size: 3.6rem;
     text-align: center;
-    color: #1c5aa0;
+    background: linear-gradient(90deg, #FF6B6B, #FFD93D, #6BCB77, #4D96FF, #FF6B9D);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     margin: 8px 0 4px;
+    font-weight: 700;
 }
 
 .hero-text {
@@ -138,9 +140,9 @@ body {
 }
 
 .candidate-image {
-    width: min(100%, 220px);
-    height: clamp(170px, 20vh, 230px);
-    object-fit: cover;
+    width: min(100%, 264px);
+    height: clamp(204px, 20vh, 276px);
+    object-fit: contain;
     border-radius: 10px;
     margin: 0 auto 6px;
     display: block;
@@ -162,8 +164,8 @@ body {
 }
 
 .voting-form-section .selectable:hover {
-    border-color: #81c784;
-    background: rgba(129, 199, 132, 0.15);
+    border-color: #FFD700;
+    background: rgba(255, 215, 0, 0.15);
     transform: translateY(-2px);
 }
 
@@ -229,8 +231,8 @@ body {
     }
 
     .candidate-image {
-        width: min(100%, 200px);
-        height: clamp(150px, 24vh, 210px);
+        width: min(100%, 240px);
+        height: clamp(180px, 24vh, 252px);
     }
 }
 
@@ -306,4 +308,10 @@ body {
 .form-disabled {
     opacity: 0.5;
     pointer-events: none;
+}
+
+@media (max-width: 768px) {
+    .success-overlay.show {
+        display: none !important;
+    }
 }
