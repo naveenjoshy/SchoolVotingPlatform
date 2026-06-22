@@ -13,6 +13,8 @@ $(document).ready(function () {
         generalViceCaptain: "#valueGeneralViceCaptain"
     };
     const $submitBtn = $('.submit-btn');
+    const $progressBar = $('#voteProgressBar');
+    const $progressText = $('#voteProgressText');
 
     // Disable submit button initially
     $submitBtn.prop('disabled', true);
@@ -42,18 +44,30 @@ $(document).ready(function () {
     // Function to check if form is valid (all categories have selections)
     function checkFormValidity() {
         let allSelected = true;
+        let selectedCount = 0;
 
         for (let category of categories) {
             const isSelected = $(`input[name="${category}"]:checked`).length > 0;
             if (!isSelected) {
                 allSelected = false;
-                break;
+            } else {
+                selectedCount += 1;
             }
         }
+
+        const progressPercent = (selectedCount / categories.length) * 100;
+        const progressHue = 30 + ((selectedCount / categories.length) * 90);
+        const progressColor = `hsl(${progressHue}, 85%, 45%)`;
+        $progressBar.css('width', `${progressPercent}%`);
+        $progressBar.css('background-color', progressColor);
+        $progressText.text(`${selectedCount}/${categories.length}`);
 
         // Enable/disable submit button based on validation
         $submitBtn.prop('disabled', !allSelected);
     }
+
+    // Initialize progress state on load
+    checkFormValidity();
 
     // Handle form submission
     $("#votingForm").on("submit", function (e) {

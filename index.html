@@ -12,11 +12,14 @@
 </head>
 
 <body>
+    <audio id="successAudio" preload="auto">
+        <source src="https://assets.mixkit.co/active_storage/sfx/2013/2013-preview.mp3" type="audio/mpeg">
+    </audio>
     <div class="success-overlay" id="successOverlay">
         <div class="success-message">
             <div class="checkmark">✓</div>
             <h1>Thank You!</h1>
-            <p>Your vote has been cast successfully</p>
+            <p>Your vote has been recorded successfully</p>
         </div>
     </div>
 
@@ -34,14 +37,14 @@
                     <div class="candidate-selection-group">
                         <div class="candidate-card selectable" data-position="headBoy" data-candidate="candidate1_hb"
                             data-candidate-name="Candidate 1">
-                            <img src="Images/Candidate1.jpeg" alt="candidate1" class="candidate-image">
+                            <img src="Images/navajeeth.png" alt="candidate1" class="candidate-image">
                             <h3>Navaneeth Sibi</h3>
                             <p>Class : XII</p>
                             <input type="radio" name="headBoy" value="candidate1_hb" hidden>
                         </div>
                         <div class="candidate-card selectable" data-position="headBoy" data-candidate="candidate2_hb"
                             data-candidate-name="Candidate 2">
-                            <img src="Images/Candidate1.jpeg" alt="candidate2" class="candidate-image">
+                            <img src="Images/christy.png" alt="candidate2" class="candidate-image">
                             <h3>Christy Sunil</h3>
                             <p>Class : XII</p>
                             <input type="radio" name="headBoy" value="candidate2_hb" hidden>
@@ -54,14 +57,14 @@
                     <div class="candidate-selection-group">
                         <div class="candidate-card selectable" data-position="headGirl" data-candidate="candidate1_hg"
                             data-candidate-name="Candidate 1">
-                            <img src="Images/Candidate1.jpeg" alt="candidate1" class="candidate-image">
+                            <img src="Images/aksara.png" alt="candidate1" class="candidate-image">
                             <h3>Akshara A S</h3>
                             <p>Class : XII</p>
                             <input type="radio" name="headGirl" value="candidate1_hg" hidden>
                         </div>
                         <div class="candidate-card selectable" data-position="headGirl" data-candidate="candidate2_hg"
                             data-candidate-name="Candidate 2">
-                            <img src="Images/Candidate1.jpeg" alt="candidate2" class="candidate-image">
+                            <img src="Images/badriya.png" alt="candidate2" class="candidate-image">
                             <h3>Badriya Riswan</h3>
                             <p>Class : XII</p>
                             <input type="radio" name="headGirl" value="candidate2_hg" hidden>
@@ -74,14 +77,14 @@
                     <div class="candidate-selection-group">
                         <div class="candidate-card selectable" data-position="generalCaptain"
                             data-candidate="candidate1_gc" data-candidate-name="Candidate 1">
-                            <img src="Images/Candidate1.jpeg" alt="candidate1" class="candidate-image">
+                            <img src="Images/jeron.png" alt="candidate1" class="candidate-image">
                             <h3>Jeron Vinoy</h3>
                             <p>Class : XI</p>
                             <input type="radio" name="generalCaptain" value="candidate1_gc" hidden>
                         </div>
                         <div class="candidate-card selectable" data-position="generalCaptain"
                             data-candidate="candidate2_gc" data-candidate-name="Candidate 2">
-                            <img src="Images/Candidate1.jpeg" alt="candidate2" class="candidate-image">
+                            <img src="Images/sreehari.png" alt="candidate2" class="candidate-image">
                             <h3>Sreehari K S</h3>
                             <p>Class : XI</p>
                             <input type="radio" name="generalCaptain" value="candidate2_gc" hidden>
@@ -94,14 +97,14 @@
                     <div class="candidate-selection-group">
                         <div class="candidate-card selectable" data-position="generalViceCaptain"
                             data-candidate="candidate1_gvc" data-candidate-name="Candidate 1">
-                            <img src="Images/Candidate1.jpeg" alt="candidate1" class="candidate-image">
+                            <img src="Images/sayona.png" alt="candidate1" class="candidate-image">
                             <h3>Sayona Maria Joseph</h3>
                             <p>Class : XI</p>
                             <input type="radio" name="generalViceCaptain" value="candidate1_gvc" hidden>
                         </div>
                         <div class="candidate-card selectable" data-position="generalViceCaptain"
                             data-candidate="candidate2_gvc" data-candidate-name="Candidate 2">
-                            <img src="Images/Candidate1.jpeg" alt="candidate2" class="candidate-image">
+                            <img src="Images/angelin.png" alt="candidate2" class="candidate-image">
                             <h3>Angelin Jes Bynish</h3>
                             <p>Class : XI</p>
                             <input type="radio" name="generalViceCaptain" value="candidate2_gvc" hidden>
@@ -139,6 +142,16 @@
                     <input type="hidden" name="generalCaptain" id="valueGeneralCaptain">
                     <input type="hidden" name="generalViceCaptain" id="valueGeneralViceCaptain">
 
+                    <div class="vote-progress" aria-live="polite">
+                        <div class="vote-progress-header">
+                            <span>Progress</span>
+                            <span id="voteProgressText">0/4</span>
+                        </div>
+                        <div class="vote-progress-track">
+                            <div id="voteProgressBar" class="vote-progress-fill"></div>
+                        </div>
+                    </div>
+
                     <button type="submit" class="submit-btn">Submit Vote</button>
                 </form>
             </section>
@@ -158,6 +171,19 @@
                 },
                 method: "post",
                 success: function (response) {
+                    // Play success audio for 3 seconds
+                    const successAudio = document.getElementById('successAudio');
+                    if (successAudio) {
+                        successAudio.currentTime = 0;
+                        successAudio.play().catch(() => {
+                            // Ignore autoplay blocks in restricted browsers
+                        });
+                        setTimeout(() => {
+                            successAudio.pause();
+                            successAudio.currentTime = 0;
+                        }, 3000);
+                    }
+
                     // Disable the form
                     $('#votingForm').addClass('form-disabled');
                     $('.selectable').addClass('form-disabled');
