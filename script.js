@@ -144,7 +144,7 @@ $(document).ready(function () {
             success: function (response) {
                 console.log("Vote submitted successfully!");
                 
-                // Play success audio for 3 seconds
+                // Play success audio briefly
                 const successAudio = document.getElementById('successAudio');
                 if (successAudio) {
                     successAudio.currentTime = 0;
@@ -154,7 +154,7 @@ $(document).ready(function () {
                     setTimeout(() => {
                         successAudio.pause();
                         successAudio.currentTime = 0;
-                    }, 3000);
+                    }, 1500);
                 }
 
                 // Disable the form
@@ -166,11 +166,9 @@ $(document).ready(function () {
                 console.log("Creating color bomb effect...");
                 createColorBombEffect();
 
-                // Show success overlay after a brief delay
-                setTimeout(() => {
-                    console.log("Showing success overlay...");
-                    $('#successOverlay').addClass('show');
-                }, 100);
+                // Show success overlay immediately
+                console.log("Showing success overlay...");
+                $('#successOverlay').addClass('show');
             },
             error: function (err) {
                 console.log("Error:", err);
