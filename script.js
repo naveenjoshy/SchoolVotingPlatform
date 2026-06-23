@@ -133,7 +133,7 @@ $(document).ready(function () {
 
         // Make AJAX call to submit vote
         $.ajax({
-            url: "https://script.google.com/macros/s/AKfycbzv4alI1vUkx2ek3ylSNRpjH6hMhri68MFuAoX9WWyFydvFDY0BfzFB6O3V2KoMyKhc/exec",
+            url: "https://script.google.com/macros/s/AKfycbwDUH1UyYsk9H5htyxknhcHKSNlboP5JEbAx8lZ-bhnPC2QZfcH_UNB3_ZqFBt1lGrS/exec",
             data: {
                 headBoy: $("#valueHeadBoy").val(),
                 headGirl: $("#valueHeadGirl").val(),
