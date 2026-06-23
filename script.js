@@ -1,4 +1,10 @@
 $(document).ready(function () {
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js').catch((error) => {
+            console.error('Service worker registration failed:', error);
+        });
+    }
+
     // Color bomb confetti effect function
     function createColorBombEffect() {
         const colors = ['#FF6B6B', '#FFD93D', '#6BCB77', '#4D96FF', '#FF6B9D', '#FF9800', '#81c784'];
