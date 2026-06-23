@@ -63,8 +63,12 @@ $(document).ready(function () {
     // Disable submit button initially
     $submitBtn.prop('disabled', true);
 
+    let votingSubmitted = false;
+
     // Handle candidate card selection
     $('.selectable').on('click', function () {
+        if (votingSubmitted) return;
+
         const position = $(this).data("position");
         const candidateName = $(this).find("h3").text().trim();
 
@@ -122,6 +126,11 @@ $(document).ready(function () {
             return;
         }
 
+        // Prevent multiple submissions
+        if (votingSubmitted) return;
+        votingSubmitted = true;
+        $submitBtn.prop('disabled', true);
+
         // Make AJAX call to submit vote
         $.ajax({
             url: "https://script.google.com/macros/s/AKfycbzv4alI1vUkx2ek3ylSNRpjH6hMhri68MFuAoX9WWyFydvFDY0BfzFB6O3V2KoMyKhc/exec",
@@ -165,6 +174,9 @@ $(document).ready(function () {
             },
             error: function (err) {
                 console.log("Error:", err);
+                // Re-enable submission on error so the user can retry
+                votingSubmitted = false;
+                $submitBtn.prop('disabled', false);
             }
         });
     });
