@@ -159,44 +159,7 @@
     </div>
 
     <script>
-        $("#votingForm").submit((e) => {
-            e.preventDefault()
-            $.ajax({
-                url: "https://script.google.com/macros/s/AKfycbzv4alI1vUkx2ek3ylSNRpjH6hMhri68MFuAoX9WWyFydvFDY0BfzFB6O3V2KoMyKhc/exec",
-                data: {
-                    headBoy: $("#valueHeadBoy").val(),
-                    headGirl: $("#valueHeadGirl").val(),
-                    generalCaptain: $("#valueGeneralCaptain").val(),
-                    generalViceCaptain: $("#valueGeneralViceCaptain").val()
-                },
-                method: "post",
-                success: function (response) {
-                    // Play success audio for 3 seconds
-                    const successAudio = document.getElementById('successAudio');
-                    if (successAudio) {
-                        successAudio.currentTime = 0;
-                        successAudio.play().catch(() => {
-                            // Ignore autoplay blocks in restricted browsers
-                        });
-                        setTimeout(() => {
-                            successAudio.pause();
-                            successAudio.currentTime = 0;
-                        }, 3000);
-                    }
-
-                    // Disable the form
-                    $('#votingForm').addClass('form-disabled');
-                    $('.selectable').addClass('form-disabled');
-                    $('.candidate-panel').addClass('form-disabled');
-
-                    // Show success overlay
-                    $('#successOverlay').addClass('show');
-                },
-                error: function (err) {
-                    console.log("Error:", err);
-                }
-            })
-        })
+        // Inline script removed - all form submission logic is now in script.js
     </script>
 
 

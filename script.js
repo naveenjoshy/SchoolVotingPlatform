@@ -1,4 +1,42 @@
 $(document).ready(function () {
+    // Color bomb confetti effect function
+    function createColorBombEffect() {
+        const colors = ['#FF6B6B', '#FFD93D', '#6BCB77', '#4D96FF', '#FF6B9D', '#FF9800', '#81c784'];
+        const particleCount = 150;
+        const centerX = window.innerWidth / 2;
+        const centerY = window.innerHeight / 2;
+
+        for (let i = 0; i < particleCount; i++) {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+
+            // Random color from the bomb palette
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.backgroundColor = randomColor;
+
+            // Set starting position (center)
+            confetti.style.left = centerX + 'px';
+            confetti.style.top = centerY + 'px';
+
+            // Calculate random direction (full 360 degrees)
+            const angle = (Math.PI * 2 * i) / particleCount + (Math.random() - 0.5);
+            const velocity = 150 + Math.random() * 200;
+            const tx = Math.cos(angle) * velocity;
+            const ty = Math.sin(angle) * velocity;
+
+            // Set CSS variables for the burst animation
+            confetti.style.setProperty('--tx', tx + 'px');
+            confetti.style.setProperty('--ty', ty + 'px');
+
+            document.body.appendChild(confetti);
+
+            // Add animation class with a small delay to ensure reflow
+            setTimeout(() => {
+                confetti.classList.add('animate');
+            }, 10);
+        }
+    }
+
     const categories = ["headBoy", "headGirl", "generalCaptain", "generalViceCaptain"];
     const selectedFieldMap = {
         headBoy: "#selectedHeadBoy",
@@ -56,8 +94,8 @@ $(document).ready(function () {
         }
 
         const progressPercent = (selectedCount / categories.length) * 100;
-        const progressHue = 30 + ((selectedCount / categories.length) * 90);
-        const progressColor = `hsl(${progressHue}, 85%, 45%)`;
+        const progressColors = ['#FF0000', '#FF8800', '#FFFF00', '#66BB6A'];
+        const progressColor = progressColors[selectedCount - 1] || '#E0E0E0';
         $progressBar.css('width', `${progressPercent}%`);
         $progressBar.css('background-color', progressColor);
         $progressText.text(`${selectedCount}/${categories.length}`);
@@ -77,6 +115,52 @@ $(document).ready(function () {
         if (!validateForm()) {
             return;
         }
+
+        // Make AJAX call to submit vote
+        $.ajax({
+            url: "https://script.google.com/macros/s/AKfycbzv4alI1vUkx2ek3ylSNRpjH6hMhri68MFuAoX9WWyFydvFDY0BfzFB6O3V2KoMyKhc/exec",
+            data: {
+                headBoy: $("#valueHeadBoy").val(),
+                headGirl: $("#valueHeadGirl").val(),
+                generalCaptain: $("#valueGeneralCaptain").val(),
+                generalViceCaptain: $("#valueGeneralViceCaptain").val()
+            },
+            method: "post",
+            success: function (response) {
+                console.log("Vote submitted successfully!");
+                
+                // Play success audio for 3 seconds
+                const successAudio = document.getElementById('successAudio');
+                if (successAudio) {
+                    successAudio.currentTime = 0;
+                    successAudio.play().catch(() => {
+                        // Ignore autoplay blocks in restricted browsers
+                    });
+                    setTimeout(() => {
+                        successAudio.pause();
+                        successAudio.currentTime = 0;
+                    }, 3000);
+                }
+
+                // Disable the form
+                $('#votingForm').addClass('form-disabled');
+                $('.selectable').addClass('form-disabled');
+                $('.candidate-panel').addClass('form-disabled');
+
+                // Create color bomb effect immediately
+                console.log("Creating color bomb effect...");
+                createColorBombEffect();
+
+                // Show success overlay after a brief delay
+                setTimeout(() => {
+                    console.log("Showing success overlay...");
+                    $('#successOverlay').addClass('show');
+                }, 100);
+            },
+            error: function (err) {
+                console.log("Error:", err);
+            }
+        });
     });
 
     // Function to validate form

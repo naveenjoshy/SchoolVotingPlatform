@@ -89,7 +89,7 @@ body {
 }
 
 .form-group {
-    margin-bottom: 12px;
+    margin-bottom: 24px;
 }
 
 .candidate-panel .form-group {
@@ -332,6 +332,32 @@ body {
         transform: scale(1);
         opacity: 1;
     }
+}
+
+/* Color Bomb Confetti Animation */
+.confetti {
+    position: fixed !important;
+    width: 12px !important;
+    height: 12px !important;
+    border-radius: 50% !important;
+    z-index: 10000 !important;
+    pointer-events: none !important;
+    display: block !important;
+}
+
+@keyframes burst {
+    0% {
+        transform: translate(0, 0) scale(1) !important;
+        opacity: 1 !important;
+    }
+    100% {
+        transform: translate(var(--tx), var(--ty)) scale(0.2) !important;
+        opacity: 0.5 !important;
+    }
+}
+
+.confetti.animate {
+    animation: burst 2s ease-out infinite !important;
 }
 
 .success-message h1 {
