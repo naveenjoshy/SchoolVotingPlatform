@@ -8,7 +8,7 @@ $(document).ready(function () {
     // Color bomb confetti effect function
     function createColorBombEffect() {
         const colors = ['#FF6B6B', '#FFD93D', '#6BCB77', '#4D96FF', '#FF6B9D', '#FF9800', '#81c784'];
-        const particleCount = 150;
+        const particleCount = 350;
         const centerX = window.innerWidth / 2;
         const centerY = window.innerHeight / 2;
 
