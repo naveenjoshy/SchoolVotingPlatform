@@ -385,6 +385,28 @@ body {
     pointer-events: none;
 }
 
+/* Footer Section */
+.footer {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
+    text-align: center;
+    padding: 10px 10px;
+    margin-top: 20px;
+    border-top: 2px solid #ddd;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.footer p {
+    margin: 8px 0;
+    color: #1a2332;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.footer p:first-child {
+    font-weight: 600;
+    color: #2971b8;
+}
+
 @media (max-width: 768px) {
     .success-overlay.show {
         display: none !important;
