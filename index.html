@@ -6,6 +6,9 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Girijyothi CMI Public School - School Cabinet Election Voting Platform</title>
     <link href="Images/logo.png" rel="icon" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="style.css" rel="stylesheet">
     <script src="script.js"></script>
@@ -118,23 +121,35 @@
             <form action="" class="selection-summary-form" id="votingForm">
                 <div class="summary-field">
                     <label for="selectedHeadBoy">Head Boy</label>
-                    <input id="selectedHeadBoy" name="selectedHeadBoy" placeholder="Select a Head Boy" readonly
-                           type="text">
+                    <div class="summary-input-wrapper">
+                        <input id="selectedHeadBoy" name="selectedHeadBoy" placeholder="Select a Head Boy" readonly
+                               type="text">
+                        <span class="status-indicator"></span>
+                    </div>
                 </div>
                 <div class="summary-field">
                     <label for="selectedHeadGirl">Head Girl</label>
-                    <input id="selectedHeadGirl" name="selectedHeadGirl" placeholder="Select a Head Girl"
-                           readonly type="text">
+                    <div class="summary-input-wrapper">
+                        <input id="selectedHeadGirl" name="selectedHeadGirl" placeholder="Select a Head Girl"
+                               readonly type="text">
+                        <span class="status-indicator"></span>
+                    </div>
                 </div>
                 <div class="summary-field">
                     <label for="selectedGeneralCaptain">General Captain</label>
-                    <input id="selectedGeneralCaptain" name="selectedGeneralCaptain" placeholder="Select a General Captain"
-                           readonly type="text">
+                    <div class="summary-input-wrapper">
+                        <input id="selectedGeneralCaptain" name="selectedGeneralCaptain" placeholder="Select a General Captain"
+                               readonly type="text">
+                        <span class="status-indicator"></span>
+                    </div>
                 </div>
-                <div class=" summary-field">
+                <div class="summary-field">
                     <label for="selectedGeneralViceCaptain">General Vice-Captain</label>
-                    <input id="selectedGeneralViceCaptain" name="selectedGeneralViceCaptain" placeholder="Select a General Vice-Captain"
-                           readonly type="text">
+                    <div class="summary-input-wrapper">
+                        <input id="selectedGeneralViceCaptain" name="selectedGeneralViceCaptain" placeholder="Select a General Vice-Captain"
+                               readonly type="text">
+                        <span class="status-indicator"></span>
+                    </div>
                 </div>
 
                 <input id="valueHeadBoy" name="headBoy" type="hidden">

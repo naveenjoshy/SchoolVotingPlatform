@@ -104,8 +104,8 @@ $(document).ready(function () {
         }
 
         const progressPercent = (selectedCount / categories.length) * 100;
-        const progressColors = ['#FF0000', '#FF8800', '#FFFF00', '#66BB6A'];
-        const progressColor = progressColors[selectedCount - 1] || '#E0E0E0';
+        const progressColors = ['#ef4444', '#f97316', '#f59e0b', '#10b981'];
+        const progressColor = progressColors[selectedCount - 1] || '#cbd5e1';
         $progressBar.css('width', `${progressPercent}%`);
         $progressBar.css('background-color', progressColor);
         $progressText.text(`${selectedCount}/${categories.length}`);
